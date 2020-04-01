@@ -1,7 +1,7 @@
 <?php
     $pdo = new PDO("mysql:host=localhost;dbname=mydb;charset=utf8","root","");
 
-    if(isset($_POST['submit'])&& isset($_POST ['name']) && isset($_POST['category']) && isset ($_POST ['priority']) ){
+    if(isset($_POST['submit'])&& isset($_POST ['name']) && isset($_POST['category']) && isset ($_POST ['priority']) &&isset ($_POST ['duedate'])){
         $name = $_POST['name'];
         $sth = $pdo->prepare("INSERT INTO todos (name) VALUES (:name)");
         $sth->bindValue(':name', $name, PDO::PARAM_STR);
@@ -16,6 +16,13 @@
         $sth = $pdo->prepare("INSERT INTO todos (priority) VALUES (:priority)");
         $sth->bindValue(':priority', $priority, PDO::PARAM_STR);
         $sth->execute();
+		
+		$priority = $_POST['duedate'];
+        $sth = $pdo->prepare("INSERT INTO todos (duedate) VALUES (:duedate)");
+        $sth->bindValue(':duedate', $duedate, PDO::PARAM_STR);
+        $sth->execute();
+		
+		
 		
 		
 		
@@ -59,51 +66,56 @@
 
 
 
-
-
-    <h1>To Do List</h1>
+	<br>
+	<br>
+    <h1 align ="center">To Do List</h1>
+	
+		<label for ="viewname">Select a View</label>
+		<select id="currentview" name="viewdropdown">
+		<option value = "duetoday">Due Today</option>
+		<option value = "duetomorrow">Due Tomorrow</option>
+		<option value = "duewithinweek">Due Within 1 Week</option>
+		<option value = "highestprioritylevel">Highest Priority</option>
+		<option value = "mostrecentduedate">Most Recent Due Date</option>
+		<option value = "currentcategory">Category</option>
+		</select>
+	
+	
+	
+	
+	
+	
     <form method="post" action="">
 		<label for ="taskname">Enter a Task</label>
         <input type="text" name="name" value="">
-		<label for ="categoryname">Enter a Category</label>
-        <input type ="text" name ="category" value="">
-		<label for ="priorityname">Enter a Priority</label>
-		<input type ="text" name="priority" value="">
-		<br>
 		<label for ="duedate">Due Date:</label>
 		<input type ="date" name="date" value="">
-		<input type="submit" name="submit" value="Add Task">
-   
-   
-   
-
-   </form>
-    <form method="post" action="">
+		
+  
   <label for="categories">Choose the category</label>
   <select id="categories" name="Categories">
     <option value="category1">Work</option>
     <option value="category2">School</option>
     <option value="category3">Social</option>
   </select>
-  <input type="submit">
-</form>
-    <form method="post" action="">
+
   <label for="Priorities">Choose a Priority</label>
   <select id="priorities" name="Priorities">
-    <option value="Priority1">High</option>
-    <option value="Priority2">Medium</option>
-    <option value="Priority3">Low</option>
+    <option value="Priority1">1</option>
+    <option value="Priority2">2</option>
+    <option value="Priority3">3</option>
+	<option value ="Priority4">4</option>
   </select>
-  <input type="submit">
+ <input type="submit" name="submit" value="Add Task">
 </form>
     
     
-    <h2>Current Tasks</h2>
+    <h2 align = "center">Current Tasks</h2>
     <table class="table table-striped">
         <therad><th>Task</th><th></th></therad>
-        <therad><th>Priority</th><th></th></therad>
         <therad><th>Category</th><th></th></therad>
-		<therad><th>Due Date</th><th></th></therad>
+        <therad><th>Priority</th><th></th></therad>
+		<therad><th>Due Date:</th><th></th></therad>
 		<therad><th>
         <tbody>
 <?php
@@ -114,8 +126,9 @@
 ?>
             <tr>
                 <td><?= htmlspecialchars($row['name']) ?></td>
-				<td><?= htmlspecialchars($row['priority']) ?></td>
 				<td><?= htmlspecialchars($row['category']) ?></td>
+				<td><?= htmlspecialchars($row['priority']) ?></td>
+				<td><?= htmlspecialchars($row['duedate'])?></td>
 		
                 <td>
                     <form method="POST">
