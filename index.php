@@ -89,18 +89,18 @@
 		<label for ="taskname">Enter a Task</label>
         <input type="text" style= "border:1px solid #000" name="name" value="">
 		<label for ="duedate">Due Date:</label>
-		<input style= "border:1px solid #000" type ="date" name="date" value="">
+		<input style= "border:1px solid #000" type ="date" name="duedate" value="">
 		
   
-  <label for="categories">Choose the category</label>
-  <select style= "border:1px solid #000" id="categories" name="Categories">
+  <label for="categories">Choose the Category</label>
+  <select style= "border:1px solid #000" id="categories" name="category">
     <option value="category1">Work</option>
     <option value="category2">School</option>
     <option value="category3">Social</option>
   </select>
 
   <label for="Priorities">Choose a Priority</label>
-  <select style= "border:1px solid #000" id="priorities" name="Priorities">
+  <select style= "border:1px solid #000" id="priorities" name="priority">
     <option value="Priority1">1</option>
     <option value="Priority2">2</option>
     <option value="Priority3">3</option>
