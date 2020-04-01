@@ -2,8 +2,8 @@
     $pdo = new PDO("mysql:host=localhost;dbname=mydb;charset=utf8","root","");
 
     if(isset($_POST['submit']) ){
-        $name = $_POST['name'];
-        $sth = $pdo->prepare("INSERT INTO todos (name) VALUES (:name)");
+        $name = $_POST['name'], ['category'],['priority'];
+        $sth = $pdo->prepare("INSERT INTO todos (name, category, priority) VALUES (:name) (:category) (:priority)");
         $sth->bindValue(':name', $name, PDO::PARAM_STR);
         $sth->execute();
     }elseif(isset($_POST['delete'])){
@@ -17,10 +17,10 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 <head>
-    <title>To Do List for CSI 3450</title>
+    <title>CSI 3450 - To Do List</title>
     
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <link rel="stylesheet" href="googleapifont.css">
+    <link rel="stylesheet" href="milligram.css">
     <link rel= "stylesheet" href ="formatting.css">
  
 
@@ -57,6 +57,7 @@
         <therad><th>Task</th><th></th></therad>
         <therad><th>Priority</th><th></th></therad>
         <therad><th>Category</th><th></th></therad>
+		<therad><th>Due Date </th><th></th></therad>
         
         <tbody>
 <?php
