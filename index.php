@@ -17,7 +17,7 @@
         $sth->bindValue(':priority', $priority, PDO::PARAM_STR);
         $sth->execute();
 		
-		$priority = $_POST['duedate'];
+		$duedate = $_POST['duedate'];
         $sth = $pdo->prepare("INSERT INTO todos (duedate) VALUES (:duedate)");
         $sth->bindValue(':duedate', $duedate, PDO::PARAM_STR);
         $sth->execute();
@@ -72,12 +72,12 @@
 	
 		<label for  ="viewname">Select a View</label>
 		<select style= "border:1px solid #000" id="currentview" name="viewdropdown">
-		<option value = "duetoday">Due Today</option>
-		<option value = "duetomorrow">Due Tomorrow</option>
-		<option value = "duewithinweek">Due Within 1 Week</option>
-		<option value = "highestprioritylevel">Highest Priority</option>
-		<option value = "mostrecentduedate">Most Recent Due Date</option>
-		<option value = "currentcategory">Category</option>
+		<option value = "view1">Due Today</option>
+		<option value = "view2">Due Tomorrow</option>
+		<option value = "view3">Due Within 1 Week</option>
+		<option value = "view4">Highest Priority</option>
+		<option value = "view5">Most Recent Due Date</option>
+		<option value = "view6">Category</option>
 		</select>
 	
 	
@@ -116,10 +116,10 @@
         <therad><th>Category</th><th></th></therad>
         <therad><th>Priority</th><th></th></therad>
 		<therad><th>Due Date:</th><th></th></therad>
-		<therad><th>
+	
         <tbody>
 <?php
-    $sth = $pdo->prepare("SELECT * FROM todos ORDER BY id DESC");
+    $sth = $pdo->prepare("SELECT * FROM todos");
     $sth->execute();
     
     foreach($sth as $row) {
