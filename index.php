@@ -70,8 +70,8 @@
 	<br>
     <h1 align ="center">To Do List</h1>
 	
-		<label for ="viewname">Select a View</label>
-		<select id="currentview" name="viewdropdown">
+		<label for  ="viewname">Select a View</label>
+		<select style= "border:1px solid #000" id="currentview" name="viewdropdown">
 		<option value = "duetoday">Due Today</option>
 		<option value = "duetomorrow">Due Tomorrow</option>
 		<option value = "duewithinweek">Due Within 1 Week</option>
@@ -87,20 +87,20 @@
 	
     <form method="post" action="">
 		<label for ="taskname">Enter a Task</label>
-        <input type="text" name="name" value="">
+        <input type="text" style= "border:1px solid #000" name="name" value="">
 		<label for ="duedate">Due Date:</label>
-		<input type ="date" name="date" value="">
+		<input style= "border:1px solid #000" type ="date" name="date" value="">
 		
   
   <label for="categories">Choose the category</label>
-  <select id="categories" name="Categories">
+  <select style= "border:1px solid #000" id="categories" name="Categories">
     <option value="category1">Work</option>
     <option value="category2">School</option>
     <option value="category3">Social</option>
   </select>
 
   <label for="Priorities">Choose a Priority</label>
-  <select id="priorities" name="Priorities">
+  <select style= "border:1px solid #000" id="priorities" name="Priorities">
     <option value="Priority1">1</option>
     <option value="Priority2">2</option>
     <option value="Priority3">3</option>
