@@ -1,31 +1,20 @@
 <?php
     $pdo = new PDO("mysql:host=localhost;dbname=mydb;charset=utf8","root","");
 
-    if(isset($_POST['submit'])&& isset($_POST ['name']) && isset($_POST['category']) && isset ($_POST ['priority']) &&isset ($_POST ['duedate'])){
+    if(isset($_POST['submit'])){
+		
+		
+		
+		
         $name = $_POST['name'];
-        $sth = $pdo->prepare("INSERT INTO todos (name) VALUES (:name)");
-        $sth->bindValue(':name', $name, PDO::PARAM_STR);
-        $sth->execute();
-		
 		$category = $_POST['category'];
-        $sth = $pdo->prepare("INSERT INTO todos (category) VALUES (:category)");
-        $sth->bindValue(':category', $category, PDO::PARAM_STR);
-        $sth->execute();
-		
 		$priority = $_POST['priority'];
-        $sth = $pdo->prepare("INSERT INTO todos (priority) VALUES (:priority)");
-        $sth->bindValue(':priority', $priority, PDO::PARAM_STR);
-        $sth->execute();
-		
 		$duedate = $_POST['duedate'];
-        $sth = $pdo->prepare("INSERT INTO todos (duedate) VALUES (:duedate)");
-        $sth->bindValue(':duedate', $duedate, PDO::PARAM_STR);
-        $sth->execute();
-		
-		
-		
-		
-		
+		$viewdropdown = $_POST['viewdropdown'];
+        $sth = $pdo->prepare("INSERT INTO todos (name, category, priority, duedate, viewdropdown) VALUES ('".$name."', '".$category."', '".$priority."',".$duedate.", '".$viewdropdown."')");
+         $sth->execute();
+				
+	
     }
 	
 	elseif(isset($_POST['delete'])){
@@ -70,7 +59,18 @@
 	<br>
     <h1 align ="center">To Do List</h1>
 	
-		<label for  ="viewname">Select a View</label>
+		
+	
+	
+	
+	
+	
+	
+    <form method="post" action="">
+	
+	
+	
+	<label for  ="viewname">Select a View</label>
 		<select style= "border:1px solid #000" id="currentview" name="viewdropdown">
 		<option value = "view1">Due Today</option>
 		<option value = "view2">Due Tomorrow</option>
@@ -84,8 +84,6 @@
 	
 	
 	
-	
-    <form method="post" action="">
 		<label for ="taskname">Enter a Task</label>
         <input type="text" style= "border:1px solid #000" name="name" value="">
 		<label for ="duedate">Due Date:</label>
@@ -129,6 +127,7 @@
 				<td><?= htmlspecialchars($row['category']) ?></td>
 				<td><?= htmlspecialchars($row['priority']) ?></td>
 				<td><?= htmlspecialchars($row['duedate'])?></td>
+				<td><?= htmlspecialchars($row['viewdropdown'])?></td>
 		
                 <td>
                     <form method="POST">
