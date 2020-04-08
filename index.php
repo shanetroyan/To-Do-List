@@ -1,28 +1,27 @@
 <?php
-    $pdo = new PDO("mysql:host=localhost;dbname=mydb;charset=utf8","root","");
+  include 'connection.php';
 
     if(isset($_POST['submit'])){
-		
-		
-		
-		
-        $name = $_POST['name'];
+    $name = $_POST['name'];
 		$category = $_POST['category'];
-		$priority = $_POST['priority'];
-		$duedate = $_POST['duedate'];
-		$viewdropdown = $_POST['viewdropdown'];
-        $sth = $pdo->prepare("INSERT INTO todos (name, category, priority, duedate, viewdropdown) VALUES ('".$name."', '".$category."', '".$priority."',".$duedate.", '".$viewdropdown."')");
-         $sth->execute();
-				
-	
-    }
-	
-	elseif(isset($_POST['delete'])){
+		$priority = $_POST ['priority'];
+		$duedate = $_POST ['duedate'];
+
+
+  $result=mysqli_query($conn,"INSERT INTO todos (name, category, priority, duedate) VALUES ('".$name . "','".$category . "','".$priority."','".$duedate. "');");
+
+}
+		echo $_REQUEST['name'];
+		echo $_REQUEST['category'];
+		echo $_REQUEST['priority'];
+
+		echo $_REQUEST['duedate'];
+
+
+	else if(isset($_POST['delete'])){
         $id = $_POST['id'];
-        $sth = $pdo->prepare("delete from todos where id = :id");
-        $sth->bindValue(':id', $id, PDO::PARAM_INT);
-        $sth->execute();
-    }
+    $result=mysqli_query($conn,"DELETE FROM todos(id) VALUES  ('".$id."');");
+      }
 ?>
 
 
@@ -30,24 +29,15 @@
 <html lang="ja">
 <head>
     <title>To Do List for CSI 3450</title>
-    
+
     <link rel="stylesheet" href="googleapifont.css">
     <link rel="stylesheet" href="milligram.css">
-		
-<style>
-.button-black {
- background-color: black;
- border-color: black;
- </style>
-	
-	
-	
-	
-	
+
+
     <link rel= "stylesheet" href ="formatting.css">
 
-	
-	
+
+
  </head>
 
 <body class="container">
@@ -58,20 +48,9 @@
 	<br>
 	<br>
     <h1 align ="center">To Do List</h1>
-	
-		
-	
-	
-	
-	
-	
-	
-    <form method="post" action="">
-	
-	
-	
-	<label for  ="viewname">Select a View</label>
-		<select style= "border:1px solid #000" id="currentview" name="viewdropdown">
+
+		<label for  ="viewname">Select a View</label>
+		<select style= "border:1px solid #000" id="currentview" name="view">
 		<option value = "view1">Due Today</option>
 		<option value = "view2">Due Tomorrow</option>
 		<option value = "view3">Due Within 1 Week</option>
@@ -79,17 +58,19 @@
 		<option value = "view5">Most Recent Due Date</option>
 		<option value = "view6">Category</option>
 		</select>
-	
-	
-	
-	
-	
+
+
+
+
+
+
+    <form method="post" action="">
 		<label for ="taskname">Enter a Task</label>
         <input type="text" style= "border:1px solid #000" name="name" value="">
 		<label for ="duedate">Due Date:</label>
 		<input style= "border:1px solid #000" type ="date" name="duedate" value="">
-		
-  
+
+
   <label for="categories">Choose the Category</label>
   <select style= "border:1px solid #000" id="categories" name="category">
     <option value="category1">Work</option>
@@ -106,29 +87,33 @@
   </select>
  <input type="submit" name="submit" value="Add Task">
 </form>
-    
-    
+
+
     <h2 align = "center">Current Tasks</h2>
     <table class="table table-striped">
         <therad><th>Task</th><th></th></therad>
         <therad><th>Category</th><th></th></therad>
         <therad><th>Priority</th><th></th></therad>
 		<therad><th>Due Date:</th><th></th></therad>
-	
+
         <tbody>
 <?php
-    $sth = $pdo->prepare("SELECT * FROM todos");
-    $sth->execute();
-    
-    foreach($sth as $row) {
+include 'connection.php';
+global $conn;
+
+//$result=mysqli_query($conn,"DELETE FROM todos(id) WHERE id = '".$id."');");
+$result=mysqli_query($conn,"SELECT * FROM todos");
+
+
+    foreach($result as $row) {
 ?>
-            <tr>
-                <td><?= htmlspecialchars($row['name']) ?></td>
-				<td><?= htmlspecialchars($row['category']) ?></td>
-				<td><?= htmlspecialchars($row['priority']) ?></td>
-				<td><?= htmlspecialchars($row['duedate'])?></td>
-				<td><?= htmlspecialchars($row['viewdropdown'])?></td>
-		
+        <tr>
+        <td><?php= htmlspecialchars($row['name']) ?></td>
+				<td><?php= htmlspecialchars($row['category']) ?></td>
+				<td><?php= htmlspecialchars($row['priority']) ?></td>
+				<td><?php= htmlspecialchars($row['duedate'])?></td>
+				<td><?php= htmlspecialchars($row['view'])?></td>
+
                 <td>
                     <form method="POST">
                         <button type="submit" name="delete">Remove Task</button>
@@ -138,7 +123,7 @@
                 </td>
             </tr>
 <?php
-    }
+
 ?>
         </tbody>
     </table>
