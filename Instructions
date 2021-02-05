@@ -1,0 +1,42 @@
+Here are the directions to run this web application...
+
+1) Create a web hosting environment (either local or cloud)  
+2) Install Apache, MySQL, and PHP (check compatible versions in source code)
+3) Replace the index.php file with the one downloaded from the project
+4) Add the 3 CSS style sheets from the project-> "milligram.css", "googleapifont.css", and "formatting.css" to the CSS folder of the web hosting environment
+5) Ensure that Apache, MySQL, and PHP are currently running on the web host environment
+6) Login to PhpMyAdmin with the following configuration -> host: 'localhost', dbname: 'mydb', user: "root", password: "" 
+ For the host: if it is not being hosted locally then enter your web hosting URL in place of localhost. 
+
+Note: If there is an error in connecting, make sure the database: 'mydb' has already been created in MySQL.
+This can be done by opening the MySQL Command Line Shell and entering the following:
+
+"mysql -u root -p create mydb"
+
+Password: leave blank
+
+7) Initialize a new table in PHPmyAdmin called "todos" with the following MySQL Query-> "create table todos (name VARCHAR(100) NOT NULL, priority INT, duedate DATE, viewdropdown INT, PRIMARY KEY (name));"
+8) Navigate to the web hosted folder: e.g-> "http://localhost/your_custom_site_name/index.php". 
+
+Again if it is not being hosted locally then enter your web hosting URL in place of localhost. 
+
+Additionally, if the site is being run on another port other than 80, or 8080 (Default) then enter it after the hosted url --> (e.g localhost:4001)
+
+9) The web application should now load in your web browser and allow you to add and remove tasks as well as set the priority, duedate. 
+Also you should be able to change the view drop down.
+
+Screenshots will be added soon, thanks. 
+
+Languages: PHP, and SQL
+Web Development: HTML5/CSS
+Development Tools: Xampp --> Local Web Hosting Environment w/ the following: Apache 2.4, MySQL8.0, and PHP 7.0
+                   Notepad++ --> Text Editor for HTML5/CSS/PHP
+
+MySQL8.0 Documentation: https://dev.mysql.com/doc/refman/8.0/en/
+PHP 7.0 Documentation: https://www.php.net/distributions/manual/php_enhanced_en.chm
+Xampp: https://www.apachefriends.org/index.html
+
+                   
+                   
+                   
+                   
